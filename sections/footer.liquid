@@ -1,5 +1,5 @@
-<div class="pce-container full-width">
-  <footer class="pce-footer">
+<div class="pce-footer-wrap full-width">
+  <footer class="pce-container pce-footer">
     <a class="pce-footer__logo" href="{{ routes.root_url }}">
       {% if section.settings.logo %}
         {{ section.settings.logo | image_url: width: 400 | image_tag: alt: shop.name, loading: 'lazy' }}
@@ -35,14 +35,17 @@
 </div>
 
 {% stylesheet %}
+  .pce-footer-wrap {
+    border-top: 2px solid var(--pce-divider);
+  }
   .pce-footer {
     display: flex;
     flex-wrap: wrap;
     gap: 16px 32px;
     align-items: center;
     justify-content: space-between;
-    padding: 32px 0 40px;
-    border-top: 2px solid var(--pce-divider);
+    padding-top: 32px;
+    padding-bottom: 40px;
     font-size: 13px;
     color: color-mix(in srgb, var(--pce-text) 70%, transparent);
   }
