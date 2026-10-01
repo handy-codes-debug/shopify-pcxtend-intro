@@ -1,0 +1,213 @@
+<div class="pce-container full-width">
+  <section
+    id="{{ section.settings.anchor_id | default: 'services' }}"
+    class="pce-section{% if section.settings.show_divider %} pce-section--divided{% endif %}"
+  >
+    <div class="pce-services__intro">
+      <div>
+        {% if section.settings.eyebrow != blank %}
+          <span class="pce-eyebrow">{{ section.settings.eyebrow }}</span>
+        {% endif %}
+        <h2 class="pce-heading">{{ section.settings.heading }}</h2>
+      </div>
+      {% if section.settings.text != blank %}
+        <div class="pce-lede">{{ section.settings.text }}</div>
+      {% endif %}
+    </div>
+
+    <div class="pce-services__grid">
+      {% for block in section.blocks %}
+        {% liquid
+          assign number = forloop.index | prepend: '0' | slice: -2, 2
+          if block.type == 'cta'
+            assign tag = 'a'
+          else
+            assign tag = 'div'
+          endif
+        %}
+        <{{ tag }}
+          class="pce-services__item{% if block.type == 'cta' %} pce-services__item--link{% endif %}"
+          {% if block.type == 'cta' %}
+            href="{{ block.settings.link | default: '#contact' }}"
+          {% endif %}
+          {{ block.shopify_attributes }}
+        >
+          <span class="pce-services__number">{{ number }}</span>
+          <h3 class="pce-services__title">{{ block.settings.title }}</h3>
+          <p class="pce-services__text">{{ block.settings.text }}</p>
+          {% if block.type == 'cta' and block.settings.link_label != blank %}
+            <span class="pce-services__more">{{ block.settings.link_label }}</span>
+          {% endif %}
+        </{{ tag }}>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+{% stylesheet %}
+  .pce-services__intro {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 24px 64px;
+    align-items: end;
+    margin-bottom: 48px;
+  }
+  .pce-services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 2px;
+    background: var(--pce-divider);
+    border: 2px solid var(--pce-divider);
+  }
+  .pce-services__item {
+    background: var(--pce-bg);
+    padding: 28px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 220px;
+  }
+  body a.pce-services__item--link {
+    text-decoration: none;
+    color: var(--pce-text);
+  }
+  body a.pce-services__item--link:hover {
+    background: var(--pce-accent-100);
+    color: var(--pce-text);
+  }
+  .pce-services__number {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--pce-accent);
+    font-feature-settings: 'tnum' 1;
+  }
+  .pce-services__title {
+    font-family: var(--pce-font);
+    font-weight: var(--pce-heading-weight);
+    font-size: 22px;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .pce-services__text {
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--pce-muted);
+  }
+  .pce-services__more {
+    margin-top: auto;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--pce-accent-700);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PCE services",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Services"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The full stack, under one contract."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>From the cable in the wall to the application on the screen, we plan, install and support each layer — so nothing falls between vendors.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "Show top divider",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "default": "services"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Service"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description"
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "name": "Link card",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "And more!"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Contact us for our comprehensive professional assistance."
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Contact us →"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Defaults to the contact section."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PCE services",
+      "blocks": [
+        {
+          "type": "service",
+          "settings": {
+            "title": "Systems integration"
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "title": "Networking infrastructure"
+          }
+        },
+        {
+          "type": "cta"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

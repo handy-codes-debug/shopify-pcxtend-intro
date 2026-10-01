@@ -1,39 +1,63 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
-  </div>
+<div class="pce-container full-width">
+  <footer class="pce-footer">
+    <a class="pce-footer__logo" href="{{ routes.root_url }}">
+      {% if section.settings.logo %}
+        {{ section.settings.logo | image_url: width: 400 | image_tag: alt: shop.name, loading: 'lazy' }}
+      {% else %}
+        {{ 'pce-logo.jpg' | asset_url | image_tag: alt: shop.name, width: 1024, height: 230, loading: 'lazy' }}
+      {% endif %}
+    </a>
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+    <div class="pce-footer__links">
+      {% if section.settings.menu.links.size > 0 %}
+        {% for link in section.settings.menu.links %}
+          {{ link.title | link_to: link.url }}
+        {% endfor %}
+      {% else %}
+        <a href="{{ routes.root_url }}#services">Services</a>
+        <a href="{{ routes.root_url }}#approach">Approach</a>
+        <a href="{{ routes.root_url }}#about">About</a>
+        <a href="{{ routes.root_url }}#contact">Contact</a>
+      {% endif %}
+    </div>
 
-  <div class="footer__payment">
     {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
+      <div class="pce-footer__payment">
+        {% for type in shop.enabled_payment_types %}
+          {{ type | payment_type_svg_tag }}
+        {% endfor %}
+      </div>
     {% endif %}
-  </div>
-</footer>
+
+    <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+  </footer>
+</div>
 
 {% stylesheet %}
-  footer {
+  .pce-footer {
     display: flex;
+    flex-wrap: wrap;
+    gap: 16px 32px;
+    align-items: center;
     justify-content: space-between;
-    margin-top: 2rem;
+    padding: 32px 0 40px;
+    border-top: 2px solid var(--pce-divider);
+    font-size: 13px;
+    color: color-mix(in srgb, var(--pce-text) 70%, transparent);
   }
-  footer a {
-    text-decoration: none;
-    color: var(--color-foreground);
+  .pce-footer__logo img {
+    height: 28px;
+    width: auto;
+    mix-blend-mode: multiply;
   }
-  footer .footer__links,
-  footer .footer__payment {
+  .pce-footer__links,
+  .pce-footer__payment {
     display: flex;
-    gap: 1rem;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  body .pce-footer__links a {
+    color: inherit;
   }
 {% endstylesheet %}
 
@@ -42,15 +66,22 @@
   "name": "t:general.footer",
   "settings": [
     {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Leave empty to use the bundled PCE Group logo."
+    },
+    {
       "type": "link_list",
       "id": "menu",
-      "label": "t:labels.menu"
+      "label": "t:labels.menu",
+      "info": "Leave empty to link to the homepage sections."
     },
     {
       "type": "checkbox",
       "id": "show_payment_icons",
       "label": "t:labels.show_payment_icons",
-      "default": true
+      "default": false
     }
   ]
 }

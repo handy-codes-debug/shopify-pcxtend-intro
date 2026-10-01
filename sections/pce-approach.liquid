@@ -1,0 +1,154 @@
+<div class="pce-container full-width">
+  <section
+    id="{{ section.settings.anchor_id | default: 'approach' }}"
+    class="pce-section{% if section.settings.show_divider %} pce-section--divided{% endif %}"
+  >
+    {% if section.settings.eyebrow != blank %}
+      <span class="pce-eyebrow">{{ section.settings.eyebrow }}</span>
+    {% endif %}
+    <h2 class="pce-heading pce-approach__heading">{{ section.settings.heading }}</h2>
+
+    <div class="pce-approach__steps">
+      {% for block in section.blocks %}
+        <div class="pce-approach__step" {{ block.shopify_attributes }}>
+          <div class="pce-approach__label">
+            <span class="pce-approach__marker"></span>
+            <span>{{ section.settings.step_prefix }} {{ forloop.index }}</span>
+          </div>
+          <h3 class="pce-approach__title">{{ block.settings.title }}</h3>
+          <p class="pce-approach__text">{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+{% stylesheet %}
+  .pce-approach__heading {
+    margin-bottom: 48px;
+    max-width: 20ch;
+  }
+  .pce-approach__steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 0 32px;
+  }
+  .pce-approach__step {
+    border-top: 2px solid var(--pce-text);
+    padding-top: 20px;
+    padding-bottom: 32px;
+  }
+  .pce-approach__label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .pce-approach__marker {
+    width: 10px;
+    height: 10px;
+    background: var(--pce-accent);
+  }
+  .pce-approach__title {
+    font-family: var(--pce-font);
+    font-weight: var(--pce-heading-weight);
+    font-size: 22px;
+    margin: 0 0 12px;
+  }
+  .pce-approach__text {
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--pce-muted);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PCE approach",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Approach"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "One team from assessment to support."
+    },
+    {
+      "type": "text",
+      "id": "step_prefix",
+      "label": "Step label",
+      "default": "Step"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "Show top divider",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "default": "approach"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Step"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PCE approach",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Assess"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Design"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Deploy"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Support"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

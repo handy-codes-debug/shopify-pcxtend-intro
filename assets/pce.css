@@ -1,0 +1,207 @@
+/** PCE Group design system — tokens and shared components used by the pce-* sections. */
+
+:root {
+  --pce-bg: #f3f2f2;
+  --pce-surface: #eae9e9;
+  --pce-text: #201e1d;
+  --pce-divider: color-mix(in srgb, #201e1d 40%, transparent);
+  --pce-muted: color-mix(in srgb, var(--pce-text) 78%, transparent);
+
+  --pce-accent: #0f6b3f;
+  --pce-accent-100: #e9f3ed;
+  --pce-accent-300: #a9d0b8;
+  --pce-accent-600: #0d5e37;
+  --pce-accent-700: #0b5130;
+  --pce-accent-800: #083b23;
+
+  --pce-font: 'Archivo', system-ui, sans-serif;
+  --pce-heading-weight: 800;
+  --pce-gutter: clamp(20px, 5vw, 72px);
+  --pce-max-width: 1200px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--pce-bg);
+  color: var(--pce-text);
+  font-family: var(--pce-font);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+body a {
+  color: var(--pce-accent-700);
+  text-underline-offset: 3px;
+}
+
+body a:hover {
+  color: var(--pce-accent-800);
+}
+
+:focus-visible {
+  outline: 2px solid var(--pce-accent);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--pce-accent) 30%, transparent);
+}
+
+/* — layout — */
+.pce-container {
+  max-width: var(--pce-max-width);
+  margin: 0 auto;
+  padding-inline: var(--pce-gutter);
+}
+
+.pce-section {
+  padding-block: clamp(56px, 7vw, 96px);
+  scroll-margin-top: 72px;
+}
+
+.pce-section--divided {
+  border-top: 2px solid var(--pce-divider);
+}
+
+/* — type — */
+.pce-eyebrow {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pce-accent-700);
+  margin-bottom: 16px;
+}
+
+.pce-heading {
+  font-family: var(--pce-font);
+  font-weight: var(--pce-heading-weight);
+  font-size: clamp(30px, 3.6vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.pce-heading--sm {
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.1;
+}
+
+.pce-lede {
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 52ch;
+  color: var(--pce-muted);
+}
+
+.pce-lede p {
+  margin: 0 0 16px;
+}
+
+.pce-lede p:last-child {
+  margin-bottom: 0;
+}
+
+/* — buttons — */
+.pce-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--pce-font);
+  font-weight: var(--pce-heading-weight);
+  font-size: 14px;
+  line-height: 1.2;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0;
+  padding: 8px 14.4px;
+}
+
+body .pce-btn--primary {
+  background: var(--pce-accent);
+  color: var(--pce-bg);
+}
+
+body .pce-btn--primary:hover {
+  background: var(--pce-accent-600);
+  color: var(--pce-bg);
+}
+
+body .pce-btn--primary:active {
+  background: var(--pce-accent-700);
+}
+
+body .pce-btn--ghost {
+  color: var(--pce-accent);
+  padding-inline: 4px;
+}
+
+body .pce-btn--ghost:hover {
+  background: color-mix(in srgb, var(--pce-accent) 10%, transparent);
+  color: var(--pce-accent);
+}
+
+/* — media — */
+.pce-media {
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  background: var(--pce-surface);
+}
+
+.pce-media img,
+.pce-media svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pce-media svg {
+  fill: color-mix(in srgb, var(--pce-text) 25%, transparent);
+}
+
+.pce-grayscale {
+  filter: grayscale(1) contrast(1.08);
+}
+
+/* — forms — */
+.pce-field > label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: color-mix(in srgb, var(--pce-text) 70%, transparent);
+}
+
+.pce-input {
+  width: 100%;
+  min-height: 36px;
+  padding: 6px 10px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--pce-text);
+  caret-color: var(--pce-accent);
+  background: var(--pce-surface);
+  border: 1px solid var(--pce-divider);
+  border-radius: 0;
+}
+
+.pce-input:hover {
+  border-color: color-mix(in srgb, var(--pce-text) 45%, transparent);
+}
+
+.pce-input:focus-visible {
+  border-color: var(--pce-accent);
+  outline-offset: 0;
+}
+
+textarea.pce-input {
+  min-height: 90px;
+  resize: vertical;
+}

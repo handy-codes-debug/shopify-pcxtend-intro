@@ -9,12 +9,193 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
-      "settings": {}
+    "hero": {
+      "type": "pce-hero",
+      "settings": {
+        "eyebrow": "System integrator · One-stop IT",
+        "heading_line_1": "Every system.",
+        "heading_line_2": "One integrator.",
+        "text": "<p>PCE Group Inc. designs, builds and runs the technology your business depends on — networks, servers, hosting, surveillance and custom software — delivered and managed by a single team.</p>",
+        "primary_label": "Start a project",
+        "secondary_label": "View services",
+        "show_image": true,
+        "grayscale": true,
+        "anchor_id": "top"
+      }
+    },
+    "services": {
+      "type": "pce-services",
+      "blocks": {
+        "service-1": {
+          "type": "service",
+          "settings": {
+            "title": "Systems integration",
+            "text": "Hardware, software and services from different vendors brought together into one working environment."
+          }
+        },
+        "service-2": {
+          "type": "service",
+          "settings": {
+            "title": "Networking infrastructure",
+            "text": "Structured cabling, switching, routing, Wi-Fi and firewalls, designed for the load you have and the growth you plan."
+          }
+        },
+        "service-3": {
+          "type": "service",
+          "settings": {
+            "title": "Server setup",
+            "text": "Specification, racking, virtualization, storage and backup — configured, documented and handed over ready to run."
+          }
+        },
+        "service-4": {
+          "type": "service",
+          "settings": {
+            "title": "Hosting",
+            "text": "Managed hosting for websites, applications and email, with monitoring, updates and backups handled for you."
+          }
+        },
+        "service-5": {
+          "type": "service",
+          "settings": {
+            "title": "Surveillance systems",
+            "text": "IP cameras, recording and remote viewing, installed and integrated with your network and access control."
+          }
+        },
+        "service-6": {
+          "type": "service",
+          "settings": {
+            "title": "Software development",
+            "text": "Custom applications, integrations and internal tools built around how your business actually works."
+          }
+        },
+        "service-7": {
+          "type": "service",
+          "settings": {
+            "title": "Project management",
+            "text": "One accountable lead coordinating scope, schedule, vendors and budget from kickoff to handover."
+          }
+        },
+        "service-8": {
+          "type": "service",
+          "settings": {
+            "title": "Ongoing IT support",
+            "text": "Helpdesk, maintenance and upgrades after go-live, from the same team that built the system."
+          }
+        },
+        "more": {
+          "type": "cta",
+          "settings": {
+            "title": "And more!",
+            "text": "Contact us for our comprehensive professional assistance.",
+            "link_label": "Contact us →"
+          }
+        }
+      },
+      "block_order": [
+        "service-1",
+        "service-2",
+        "service-3",
+        "service-4",
+        "service-5",
+        "service-6",
+        "service-7",
+        "service-8",
+        "more"
+      ],
+      "settings": {
+        "eyebrow": "Services",
+        "heading": "The full stack, under one contract.",
+        "text": "<p>From the cable in the wall to the application on the screen, we plan, install and support each layer — so nothing falls between vendors.</p>",
+        "show_divider": true,
+        "anchor_id": "services"
+      }
+    },
+    "approach": {
+      "type": "pce-approach",
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "title": "Assess",
+            "text": "We review your site, current systems and goals, and identify what to keep, replace or add."
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "title": "Design",
+            "text": "A single plan covering network, hardware, security and software, with a clear scope and quote."
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "title": "Deploy",
+            "text": "Our project lead manages installation and configuration on schedule, with minimal disruption."
+          }
+        },
+        "step-4": {
+          "type": "step",
+          "settings": {
+            "title": "Support",
+            "text": "Documentation, training and ongoing maintenance, with one number to call."
+          }
+        }
+      },
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3",
+        "step-4"
+      ],
+      "settings": {
+        "eyebrow": "Approach",
+        "heading": "One team from assessment to support.",
+        "step_prefix": "Step",
+        "show_divider": true,
+        "anchor_id": "approach"
+      }
+    },
+    "about": {
+      "type": "pce-about",
+      "settings": {
+        "grayscale": true,
+        "eyebrow": "About PCE Group",
+        "heading": "One call instead of five vendors.",
+        "text": "<p>Most IT projects stall at the handoffs — between the cabling contractor, the hardware reseller, the security installer and the developer. PCE Group Inc. covers all of them, so responsibility stays in one place.</p><p>We work with offices, retail, warehouses and multi-site organizations that need infrastructure done properly and supported afterward.</p>",
+        "show_divider": true,
+        "anchor_id": "about"
+      }
+    },
+    "closing": {
+      "type": "pce-cta-band",
+      "settings": {
+        "style": "green",
+        "heading_line_1": "Planning a new site, upgrade or build-out?",
+        "heading_line_2": "Talk to one team about all of it."
+      }
+    },
+    "contact": {
+      "type": "pce-contact",
+      "settings": {
+        "eyebrow": "Contact",
+        "heading": "Tell us what you need.",
+        "text": "<p>Send a short description of your project and we will reply within one business day to arrange an assessment.</p>",
+        "phone": "(000) 000-0000",
+        "email": "info@pcegroupinc.com",
+        "address": "21 Barstow Road, Unit 1J\nGreat Neck, New York 11021",
+        "submit_label": "Send request",
+        "show_divider": false,
+        "anchor_id": "contact"
+      }
     }
   },
   "order": [
-    "main"
+    "hero",
+    "services",
+    "approach",
+    "about",
+    "closing",
+    "contact"
   ]
 }

@@ -1,0 +1,304 @@
+<div class="pce-container full-width">
+  <section
+    id="{{ section.settings.anchor_id | default: 'contact' }}"
+    class="pce-section pce-contact{% if section.settings.show_divider %} pce-section--divided{% endif %}"
+  >
+    <div>
+      {% if section.settings.eyebrow != blank %}
+        <span class="pce-eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      <h2 class="pce-heading pce-heading--sm pce-contact__heading">{{ section.settings.heading }}</h2>
+      {% if section.settings.text != blank %}
+        <div class="pce-lede pce-contact__text">{{ section.settings.text }}</div>
+      {% endif %}
+
+      <dl class="pce-contact__details">
+        {% if section.settings.phone != blank %}
+          <div>
+            <dt>Phone</dt>
+            <dd>
+              <a href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">
+                {{- section.settings.phone -}}
+              </a>
+            </dd>
+          </div>
+        {% endif %}
+        {% if section.settings.email != blank %}
+          <div>
+            <dt>Email</dt>
+            <dd>
+              <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+            </dd>
+          </div>
+        {% endif %}
+        {% if section.settings.address != blank %}
+          <div>
+            <dt>Office</dt>
+            <dd>{{ section.settings.address | newline_to_br }}</dd>
+          </div>
+        {% endif %}
+      </dl>
+    </div>
+
+    <div class="pce-contact__panel">
+      {% form 'contact', id: 'pce-contact-form', class: 'pce-contact__form' %}
+        {% if form.posted_successfully? %}
+          <div class="pce-contact__success" role="status">
+            <span class="pce-contact__marker"></span>
+            <h3>{{ section.settings.success_heading }}</h3>
+            <p>{{ section.settings.success_text }}</p>
+            <div>
+              <a class="pce-btn pce-btn--ghost" href="{{ routes.root_url }}#{{ section.settings.anchor_id | default: 'contact' }}">
+                Send another
+              </a>
+            </div>
+          </div>
+        {% else %}
+          {% if form.errors %}
+            <div class="pce-contact__errors" role="alert">{{ form.errors | default_errors }}</div>
+          {% endif %}
+
+          <div class="pce-contact__row">
+            <div class="pce-field">
+              <label for="pce-contact-name">Name</label>
+              <input
+                id="pce-contact-name"
+                class="pce-input"
+                type="text"
+                name="contact[name]"
+                autocomplete="name"
+                value="{{ form.name }}"
+                required
+              >
+            </div>
+            <div class="pce-field">
+              <label for="pce-contact-company">Company</label>
+              <input
+                id="pce-contact-company"
+                class="pce-input"
+                type="text"
+                name="contact[company]"
+                autocomplete="organization"
+              >
+            </div>
+          </div>
+          <div class="pce-field">
+            <label for="pce-contact-email">Email</label>
+            <input
+              id="pce-contact-email"
+              class="pce-input"
+              type="email"
+              name="contact[email]"
+              autocomplete="email"
+              value="{{ form.email }}"
+              required
+            >
+          </div>
+          <div class="pce-field">
+            <label for="pce-contact-service">Service</label>
+            <select id="pce-contact-service" class="pce-input" name="contact[service]">
+              {% assign service_options = section.settings.service_options | newline_to_br | split: '<br />' %}
+              {% for option in service_options %}
+                {% assign option_label = option | strip %}
+                {% if option_label != blank %}
+                  <option>{{ option_label }}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+          <div class="pce-field">
+            <label for="pce-contact-body">Project details</label>
+            <textarea id="pce-contact-body" class="pce-input" name="contact[body]" rows="5">
+              {{- form.body -}}
+            </textarea>
+          </div>
+          <div>
+            <button type="submit" class="pce-btn pce-btn--primary pce-contact__submit">
+              {{- section.settings.submit_label -}}
+            </button>
+          </div>
+        {% endif %}
+      {% endform %}
+    </div>
+  </section>
+</div>
+
+{% stylesheet %}
+  .pce-contact {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: clamp(32px, 5vw, 96px);
+  }
+  .pce-contact__heading {
+    margin-bottom: 24px;
+  }
+  .pce-contact__text {
+    max-width: 44ch;
+    margin-bottom: 40px;
+  }
+  .pce-contact__details {
+    margin: 0;
+    border-top: 2px solid var(--pce-divider);
+  }
+  .pce-contact__details > div {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 2px solid var(--pce-divider);
+  }
+  .pce-contact__details dt {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--pce-text) 70%, transparent);
+  }
+  .pce-contact__details dd {
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .pce-contact__panel {
+    background: var(--pce-surface);
+    padding: clamp(24px, 3vw, 40px);
+  }
+  .pce-contact__form {
+    display: grid;
+    gap: 20px;
+  }
+  .pce-contact__row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+    gap: 20px;
+  }
+  .pce-contact__submit {
+    min-width: 220px;
+  }
+  .pce-contact__errors {
+    padding: 12px 16px;
+    border-left: 3px solid #b3261e;
+    background: color-mix(in srgb, #b3261e 8%, transparent);
+    font-size: 14px;
+  }
+  .pce-contact__errors ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  .pce-contact__success {
+    display: grid;
+    gap: 16px;
+    min-height: 320px;
+    align-content: center;
+  }
+  .pce-contact__success h3 {
+    font-family: var(--pce-font);
+    font-weight: var(--pce-heading-weight);
+    font-size: 28px;
+    margin: 0;
+  }
+  .pce-contact__success p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--pce-muted);
+  }
+  .pce-contact__marker {
+    width: 10px;
+    height: 10px;
+    background: var(--pce-accent);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PCE contact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Tell us what you need."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Send a short description of your project and we will reply within one business day to arrange an assessment.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Contact details"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone",
+      "default": "(000) 000-0000"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "info@pcegroupinc.com"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Office address",
+      "default": "21 Barstow Road, Unit 1J\nGreat Neck, New York 11021"
+    },
+    {
+      "type": "header",
+      "content": "Form"
+    },
+    {
+      "type": "textarea",
+      "id": "service_options",
+      "label": "Service options",
+      "info": "One option per line.",
+      "default": "Systems integration\nNetworking infrastructure\nServer setup\nHosting\nSurveillance systems\nSoftware development\nProject management\nOngoing IT support\nNot sure yet"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit button label",
+      "default": "Send request"
+    },
+    {
+      "type": "text",
+      "id": "success_heading",
+      "label": "Success heading",
+      "default": "Request received."
+    },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Success message",
+      "default": "Thank you. A member of the PCE Group team will be in touch within one business day."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "Show top divider",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "default": "contact"
+    }
+  ],
+  "presets": [
+    {
+      "name": "PCE contact"
+    }
+  ]
+}
+{% endschema %}

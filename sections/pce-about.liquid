@@ -1,0 +1,98 @@
+<div class="pce-container full-width">
+  <section
+    id="{{ section.settings.anchor_id | default: 'about' }}"
+    class="pce-section pce-about{% if section.settings.show_divider %} pce-section--divided{% endif %}"
+  >
+    <figure class="pce-media pce-about__media{% if section.settings.grayscale %} pce-grayscale{% endif %}">
+      {% if section.settings.image %}
+        {{
+          section.settings.image
+          | image_url: width: 1400
+          | image_tag:
+            loading: 'lazy',
+            sizes: '(min-width: 900px) 50vw, 100vw',
+            widths: '600, 900, 1200, 1400'
+        }}
+      {% else %}
+        {{ 'image' | placeholder_svg_tag }}
+      {% endif %}
+    </figure>
+    <div>
+      {% if section.settings.eyebrow != blank %}
+        <span class="pce-eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      <h2 class="pce-heading pce-heading--sm pce-about__heading">{{ section.settings.heading }}</h2>
+      <div class="pce-lede">{{ section.settings.text }}</div>
+    </div>
+  </section>
+</div>
+
+{% stylesheet %}
+  .pce-about {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+    gap: clamp(32px, 5vw, 96px);
+    align-items: center;
+  }
+  .pce-about__media {
+    aspect-ratio: 951 / 665;
+  }
+  .pce-about__heading {
+    margin-bottom: 24px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PCE about",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Suggested: the PCE team or a completed install."
+    },
+    {
+      "type": "checkbox",
+      "id": "grayscale",
+      "label": "Grayscale image",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "About PCE Group"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "One call instead of five vendors."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Most IT projects stall at the handoffs — between the cabling contractor, the hardware reseller, the security installer and the developer. PCE Group Inc. covers all of them, so responsibility stays in one place.</p><p>We work with offices, retail, warehouses and multi-site organizations that need infrastructure done properly and supported afterward.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "Show top divider",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "default": "about"
+    }
+  ],
+  "presets": [
+    {
+      "name": "PCE about"
+    }
+  ]
+}
+{% endschema %}

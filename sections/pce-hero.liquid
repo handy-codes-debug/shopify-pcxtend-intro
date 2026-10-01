@@ -1,0 +1,180 @@
+<div class="pce-container full-width" id="{{ section.settings.anchor_id | default: 'top' }}">
+  <section class="pce-hero">
+    <div>
+      {% if section.settings.eyebrow != blank %}
+        <span class="pce-eyebrow pce-hero__eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      <h1 class="pce-hero__title">
+        <span>{{ section.settings.heading_line_1 }}</span>
+        {% if section.settings.heading_line_2 != blank %}
+          <span>{{ section.settings.heading_line_2 }}</span>
+        {% endif %}
+      </h1>
+      {% if section.settings.text != blank %}
+        <div class="pce-hero__text">{{ section.settings.text }}</div>
+      {% endif %}
+      <div class="pce-hero__actions">
+        {% if section.settings.primary_label != blank %}
+          <a class="pce-btn pce-btn--primary pce-hero__primary" href="{{ section.settings.primary_link | default: '#contact' }}">
+            {{- section.settings.primary_label -}}
+          </a>
+        {% endif %}
+        {% if section.settings.secondary_label != blank %}
+          <a class="pce-btn pce-btn--ghost" href="{{ section.settings.secondary_link | default: '#services' }}">
+            {{- section.settings.secondary_label -}}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if section.settings.show_image %}
+      <figure class="pce-media pce-hero__media{% if section.settings.grayscale %} pce-grayscale{% endif %}">
+        {% if section.settings.image %}
+          {{
+            section.settings.image
+            | image_url: width: 1400
+            | image_tag:
+              loading: 'eager',
+              fetchpriority: 'high',
+              sizes: '(min-width: 900px) 50vw, 100vw',
+              widths: '600, 900, 1200, 1400'
+          }}
+        {% else %}
+          {{ 'image' | placeholder_svg_tag }}
+        {% endif %}
+      </figure>
+    {% endif %}
+  </section>
+</div>
+
+{% stylesheet %}
+  .pce-hero {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: clamp(32px, 5vw, 80px);
+    align-items: end;
+    padding: clamp(56px, 9vw, 120px) 0 clamp(48px, 7vw, 96px);
+  }
+  .pce-hero__eyebrow {
+    margin-bottom: 24px;
+  }
+  .pce-hero__title {
+    font-family: var(--pce-font);
+    font-weight: var(--pce-heading-weight);
+    font-size: clamp(42px, 6vw, 80px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin: 0 0 0 -0.05em;
+  }
+  .pce-hero__title span {
+    display: block;
+  }
+  .pce-hero__text {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 52ch;
+    margin: 32px 0 0;
+    color: color-mix(in srgb, var(--pce-text) 80%, transparent);
+  }
+  .pce-hero__text p {
+    margin: 0;
+  }
+  .pce-hero__actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+  }
+  .pce-hero__primary {
+    min-width: 200px;
+  }
+  .pce-hero__media {
+    aspect-ratio: 4 / 3;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PCE hero",
+  "class": "pce-hero-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "System integrator · One-stop IT"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Every system."
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "One integrator."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>PCE Group Inc. designs, builds and runs the technology your business depends on — networks, servers, hosting, surveillance and custom software — delivered and managed by a single team.</p>"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "Start a project"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary button link",
+      "info": "Defaults to the contact section."
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "View services"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary button link",
+      "info": "Defaults to the services section."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show image",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Suggested: server room, install crew or network cabinet."
+    },
+    {
+      "type": "checkbox",
+      "id": "grayscale",
+      "label": "Grayscale image",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "default": "top"
+    }
+  ],
+  "presets": [
+    {
+      "name": "PCE hero"
+    }
+  ]
+}
+{% endschema %}
