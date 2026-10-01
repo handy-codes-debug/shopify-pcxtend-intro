@@ -17,9 +17,12 @@
         "heading_line_2": "One integrator.",
         "text": "<p>PCE Group Inc. designs, builds and runs the technology your business depends on — networks, servers, hosting, surveillance and custom software — delivered and managed by a single team.</p>",
         "primary_label": "Start a project",
+        "primary_link": "",
         "secondary_label": "View services",
+        "secondary_link": "",
         "show_image": true,
-        "grayscale": true,
+        "image": "shopify://shop_images/20231214-163515.jpg",
+        "grayscale": false,
         "anchor_id": "top"
       }
     },
@@ -87,7 +90,8 @@
           "settings": {
             "title": "And more!",
             "text": "Contact us for our comprehensive professional assistance.",
-            "link_label": "Contact us →"
+            "link_label": "Contact us →",
+            "link": ""
           }
         }
       },
@@ -184,7 +188,10 @@
         "phone": "(000) 000-0000",
         "email": "info@pcegroupinc.com",
         "address": "21 Barstow Road, Unit 1J\nGreat Neck, New York 11021",
+        "service_options": "Systems integration\nNetworking infrastructure\nServer setup\nHosting\nSurveillance systems\nSoftware development\nProject management\nOngoing IT support\nNot sure yet",
         "submit_label": "Send request",
+        "success_heading": "Request received.",
+        "success_text": "Thank you. A member of the PCE Group team will be in touch within one business day.",
         "show_divider": false,
         "anchor_id": "contact"
       }
