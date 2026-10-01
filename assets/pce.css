@@ -62,8 +62,9 @@ body a:hover {
   scroll-margin-top: 72px;
 }
 
-/* Full-width divider with a fixed gap at each end, so its ends don't move with the content gutter. */
+/* Divider spanning exactly the content width of .pce-container. */
 .pce-section--divided {
+  --pce-divider-inset: calc(max(0px, (100% - var(--pce-max-width)) / 2) + var(--pce-gutter));
   position: relative;
 }
 
@@ -71,8 +72,8 @@ body a:hover {
   content: '';
   position: absolute;
   top: 0;
-  left: var(--pce-divider-inset, 24px);
-  right: var(--pce-divider-inset, 24px);
+  left: var(--pce-divider-inset);
+  right: var(--pce-divider-inset);
   height: 2px;
   background: var(--pce-divider);
 }
