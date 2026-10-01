@@ -1,7 +1,7 @@
-<div class="pce-container full-width">
+<div class="full-width{% if section.settings.show_divider %} pce-section--divided{% endif %}">
   <section
     id="{{ section.settings.anchor_id | default: 'about' }}"
-    class="pce-section pce-about{% if section.settings.show_divider %} pce-section--divided{% endif %}"
+    class="pce-container pce-section pce-about"
   >
     <figure class="pce-media pce-about__media{% if section.settings.grayscale %} pce-grayscale{% endif %}">
       {% if section.settings.image %}

@@ -1,7 +1,7 @@
-<div class="pce-container full-width">
+<div class="full-width{% if section.settings.show_divider %} pce-section--divided{% endif %}">
   <section
     id="{{ section.settings.anchor_id | default: 'contact' }}"
-    class="pce-section pce-contact{% if section.settings.show_divider %} pce-section--divided{% endif %}"
+    class="pce-container pce-section pce-contact"
   >
     <div>
       {% if section.settings.eyebrow != blank %}

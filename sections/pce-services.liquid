@@ -1,7 +1,7 @@
-<div class="pce-container full-width">
+<div class="full-width{% if section.settings.show_divider %} pce-section--divided{% endif %}">
   <section
     id="{{ section.settings.anchor_id | default: 'services' }}"
-    class="pce-section{% if section.settings.show_divider %} pce-section--divided{% endif %}"
+    class="pce-container pce-section"
   >
     <div class="pce-services__intro">
       <div>
