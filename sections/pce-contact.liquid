@@ -126,8 +126,13 @@
 {% stylesheet %}
   .pce-contact {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    grid-template-columns: 1fr;
     gap: clamp(32px, 5vw, 96px);
+  }
+  @media (min-width: 768px) {
+    .pce-contact {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
   .pce-contact__heading {
     margin-bottom: 24px;
