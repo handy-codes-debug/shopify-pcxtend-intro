@@ -54,13 +54,24 @@
   }
   .pce-services__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
-    gap: 2px;
-    background: var(--pce-divider);
-    border: 2px solid var(--pce-divider);
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 2px solid var(--pce-divider);
+    border-left: 2px solid var(--pce-divider);
+  }
+  @media (max-width: 900px) {
+    .pce-services__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .pce-services__grid {
+      grid-template-columns: 1fr;
+    }
   }
   .pce-services__item {
     background: var(--pce-bg);
+    border-right: 2px solid var(--pce-divider);
+    border-bottom: 2px solid var(--pce-divider);
     padding: 28px 24px 32px;
     display: flex;
     flex-direction: column;
