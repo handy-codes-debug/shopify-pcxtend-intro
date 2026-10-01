@@ -163,7 +163,8 @@
     "about": {
       "type": "pce-about",
       "settings": {
-        "grayscale": true,
+        "image": "shopify://shop_images/Image_home_1_1.png",
+        "grayscale": false,
         "eyebrow": "About PCE Group",
         "heading": "One call instead of five vendors.",
         "text": "<p>Most IT projects stall at the handoffs — between the cabling contractor, the hardware reseller, the security installer and the developer. PCE Group Inc. covers all of them, so responsibility stays in one place.</p><p>We work with offices, retail, warehouses and multi-site organizations that need infrastructure done properly and supported afterward.</p>",
