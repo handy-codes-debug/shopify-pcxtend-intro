@@ -4,7 +4,8 @@
       {% if section.settings.logo %}
         {{ section.settings.logo | image_url: width: 400 | image_tag: alt: shop.name, loading: 'lazy' }}
       {% else %}
-        {{ 'pce-logo.jpg' | asset_url | image_tag: alt: shop.name, width: 1024, height: 230, loading: 'lazy' }}
+        <img src="{{ 'pce-logo.jpg' | asset_url }}" alt="{{ shop.name | escape }}" width="1024" height="230" loading="lazy">
+
       {% endif %}
     </a>
 
